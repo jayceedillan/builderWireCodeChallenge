@@ -26,6 +26,7 @@ namespace BuilderWireChallenge.Utilities
             {
                 idx++;
             }
+
             string alphabets = "";
 
             for (var i = 0; i < needToAdd; i++)
@@ -46,7 +47,6 @@ namespace BuilderWireChallenge.Utilities
 
             return matchWordsCount;
         }
-
         public int matchWords(string[] articles, string searchWord)
         {
             string newArticles = String.Join(",", articles.Select(a => a.ToString()).ToArray()).ToLower();
@@ -54,7 +54,6 @@ namespace BuilderWireChallenge.Utilities
 
             return matchWordsCount;
         }
-
 
         private int searchingMatchWords(string article, string searchWord)
         {
@@ -68,17 +67,20 @@ namespace BuilderWireChallenge.Utilities
             {
                 string[] searchArticleAgain = article.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries);
 
-                matchWords = searchArticleAgain.Where(a => a.ToLower().Contains(searchWord.ToLower())).AsEnumerable();
+                matchWords = searchArticleAgain.Where(a => a.Contains(searchWord, StringComparison.InvariantCultureIgnoreCase)).AsEnumerable();
                 return matchWords.Count();
 
             }
+
             return matchWords.Count();
         }
         public string[] readFiles(string fileName)
         {
+
+            currentDirectory = currentDirectory.Contains("Debug") ? Directory.GetParent(Directory.GetCurrentDirectory())!.Parent!.Parent!.FullName + "/Files/" : currentDirectory;
+            
             return File.ReadAllLines(currentDirectory + fileName);
         }
-
         public bool writeTextFile(List<string> listOfResults)
         {
             string writePathDir = currentDirectory + "Output.txt";
@@ -93,14 +95,15 @@ namespace BuilderWireChallenge.Utilities
                     }
                 }
 
-                return false;
+                return true;
             }
             catch (System.Exception ex)
             {
                 Console.WriteLine(ex);
-                return true;
+                return false;
             }
         }
+
     }
 
 }

@@ -12,16 +12,14 @@ int addAlphabet = 1;
 
 foreach (string word in words)
 {
-
     string alphabetChar = service.getAlphabet(ref alphabetIdx, ref addAlphabet);
     List<int> listOfParagraphIdx = new List<int>();
 
     int findWords = service.matchWords(articles, word);
-
     int articleIdx = 1;
+
     foreach (var article in articles)
     {
-
         int matchWordsCount = service.matchWords(article, word);
         if (matchWordsCount != 0)
         {
@@ -40,14 +38,14 @@ foreach (string word in words)
         articleIdx++;
     }
 
-
     string output = $"{alphabetChar.ToString().ToLower()}. {word} {{{findWords}:";
     string separateCommaByIdx = string.Join(",", listOfParagraphIdx);
     output += $"{separateCommaByIdx}}}";
+
     listOfResults.Add(output);
 }
 
-if (service.writeTextFile(listOfResults))
+if (!service.writeTextFile(listOfResults))
 {
     Console.WriteLine("Theres ann error while writing the files");
 }
