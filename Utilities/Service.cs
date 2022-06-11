@@ -57,7 +57,7 @@ namespace BuilderWireChallenge.Utilities
 
         private int searchingMatchWords(string article, string searchWord)
         {
-            string[] newArticles = article.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] newArticles = article.Split(new char[] { '.', ' ',',' }, StringSplitOptions.RemoveEmptyEntries);
 
             var matchWords = from word in newArticles
                              where word.Equals(searchWord, StringComparison.InvariantCultureIgnoreCase)
