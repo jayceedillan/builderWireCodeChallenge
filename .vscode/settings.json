@@ -1,0 +1,8 @@
+{
+    "razor.languageServer.debug": true,
+    "csharp.format.enable": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    }
+}
